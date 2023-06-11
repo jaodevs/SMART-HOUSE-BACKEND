@@ -1,0 +1,375 @@
+openapi: 3.0.0
+info:
+  title: Smart-House
+  version: 1.0.0
+
+paths:
+  /clientes:
+    get:
+      tags:
+        - clientes
+      summary: Retorna uma lista de clientes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+    post:
+      tags:
+        - clientes
+      summary: Cria um novo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Created
+
+  /clientes/{clienteId}:
+    get:
+      tags:
+        - clientes
+      summary: Retorna um cliente específico
+      parameters:
+        - name: clienteId
+          in: path
+          description: ID do cliente
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+    put:
+      tags:
+        - clientes
+      summary: Atualiza um cliente específico
+      parameters:
+        - name: clienteId
+          in: path
+          description: ID do cliente
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Objeto de cliente para ser atualizado
+          required: true
+          schema:
+            $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - clientes
+      summary: Deleta um cliente específico
+      parameters:
+        - name: clienteId
+          in: path
+          description: ID do cliente
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+
+  /imoveis:
+    get:
+      tags:
+        - imoveis
+      summary: Retorna uma lista de imóveis
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Imovel'
+    post:
+      tags:
+        - imoveis
+      summary: Cria um novo imóvel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Imovel'
+      responses:
+        '201':
+          description: Created
+
+  /imoveis/{imovelId}:
+    get:
+      tags:
+        - imoveis
+      summary: Retorna um imóvel específico
+      parameters:
+        - name: imovelId
+          in: path
+          description: ID do imóvel
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Imovel'
+    put:
+      tags:
+        - imoveis
+      summary: Atualiza um imóvel específico
+      parameters:
+        - name: imovelId
+          in: path
+          description: ID do imóvel
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Objeto de imóvel para ser atualizado
+          required: true
+          schema:
+            $ref: '#/components/schemas/Imovel'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - imoveis
+      summary: Deleta um imóvel específico
+      parameters:
+        - name: imovelId
+          in: path
+          description: ID do imóvel
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+
+  /comodos:
+    get:
+      tags:
+        - comodos
+      summary: Retorna uma lista de cômodos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comodo'
+    post:
+      tags:
+        - comodos
+      summary: Cria um novo cômodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comodo'
+      responses:
+        '201':
+          description: Created
+
+  /comodos/{comodoId}:
+    get:
+      tags:
+        - comodos
+      summary: Retorna um cômodo específico
+      parameters:
+        - name: comodoId
+          in: path
+          description: ID do cômodo
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comodo'
+    put:
+      tags:
+        - comodos
+      summary: Atualiza um cômodo específico
+      parameters:
+        - name: comodoId
+          in: path
+          description: ID do cômodo
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Objeto de cômodo para ser atualizado
+          required: true
+          schema:
+            $ref: '#/components/schemas/Comodo'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - comodos
+      summary: Deleta um cômodo específico
+      parameters:
+        - name: comodoId
+          in: path
+          description: ID do cômodo
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+
+  /sensores:
+    get:
+      tags:
+        - sensores
+      summary: Retorna uma lista de sensores
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sensor'
+    post:
+      tags:
+        - sensores
+      summary: Cria um novo sensor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sensor'
+      responses:
+        '201':
+          description: Created
+
+  /sensores/{sensorId}:
+    get:
+      tags:
+        - sensores
+      summary: Retorna um sensor específico
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID do sensor
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sensor'
+    put:
+      tags:
+        - sensores
+      summary: Atualiza um sensor específico
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID do sensor
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Objeto de sensor para ser atualizado
+          required: true
+          schema:
+            $ref: '#/components/schemas/Sensor'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - sensores
+      summary: Deleta um sensor específico
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID do sensor
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        email:
+          type: string
+
+    Imovel:
+      type: object
+      properties:
+        id:
+          type: string
+        jm]:
+          type: string
+        tipo:
+          type: string
+
+    Comodo:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+        area:
+          type: number
+
+    Sensor:
+      type: object
+      properties:
+        id:
+          type: string
+        tipo:
+          type: string
+        status:
+          type: string
