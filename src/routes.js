@@ -3,7 +3,7 @@ const express = require("express");
 const clientController = require("./controllers/ClientController");
 const immobileController = require("./controllers/ImmobileController");
 const rooms_of_houses = require("./controllers/RoomsOfHousesController");
-const sensors = require("./controllers/sensorsController");
+const sensors = require("./controllers/SensorsController");
 
 const routes = express.Router();
 

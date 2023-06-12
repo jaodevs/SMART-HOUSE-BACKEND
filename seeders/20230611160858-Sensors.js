@@ -1,18 +1,29 @@
 "use strict";
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const batchSize = 100; // Número de sensores para inserir em cada lote
-    const sensorTypes = ['Sensor de Chuva', 'Sensor de Gás', 'Sensor de Solo'];
+    const batchSize = 500;
+    const sensorTypes = ["Sensor de Chuva", "Sensor de Gás", "Sensor de Solo"];
 
-    const roomsOfHouses = await queryInterface.sequelize.query('SELECT id FROM rooms_of_houses;');
-    const roomIds = roomsOfHouses[0].map(room => room.id);
+    const roomsOfHouses = await queryInterface.sequelize.query(
+      "SELECT id FROM rooms_of_houses;"
+    );
+    const roomIds = roomsOfHouses[0].map((room) => room.id);
 
     for (const roomId of roomIds) {
       const sensors = [];
 
       for (let i = 0; i < 10; i++) {
+        if (sensors.length >= 300) {
+          await insertSensorsInBatch(queryInterface, sensors);
+          sensors.length = 0;
+        }
+
+        if (sensors.length >= 300) {
+          break;
+        }
+
         const sensorType = getRandomSensorType(sensorTypes);
 
         const sensor = {
@@ -21,15 +32,15 @@ module.exports = {
           value: generateArduinoSensorValue(sensorType),
           type: sensorType,
           roomId: roomId,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          created_at: new Date(),
+          updated_at: new Date(),
         };
 
         sensors.push(sensor);
 
         if (sensors.length >= batchSize) {
           await insertSensorsInBatch(queryInterface, sensors);
-          sensors.length = 0; // Limpa o array de sensores
+          sensors.length = 0; 
         }
       }
 
@@ -40,15 +51,15 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('sensors', null, {});
-  }
+    await queryInterface.bulkDelete("sensors", null, {});
+  },
 };
 
 function generateSensorName(sensorType) {
   const sensorNames = {
-    'Sensor de Chuva': ['Sensor Chuva 1', 'Sensor Chuva 2', 'Sensor Chuva 3'],
-    'Sensor de Gás': ['Sensor Gás 1', 'Sensor Gás 2', 'Sensor Gás 3'],
-    'Sensor de Solo': ['Sensor Solo 1', 'Sensor Solo 2', 'Sensor Solo 3']
+    "Sensor de Chuva": ["Sensor Chuva 1", "Sensor Chuva 2", "Sensor Chuva 3"],
+    "Sensor de Gás": ["Sensor Gás 1", "Sensor Gás 2", "Sensor Gás 3"],
+    "Sensor de Solo": ["Sensor Solo 1", "Sensor Solo 2", "Sensor Solo 3"],
   };
 
   const names = sensorNames[sensorType];
@@ -57,15 +68,15 @@ function generateSensorName(sensorType) {
 
 function generateArduinoSensorValue(sensorType) {
   const minValues = {
-    'Sensor de Chuva': 0,
-    'Sensor de Gás': 200,
-    'Sensor de Solo': 300
+    "Sensor de Chuva": 0,
+    "Sensor de Gás": 200,
+    "Sensor de Solo": 300,
   };
 
   const maxValues = {
-    'Sensor de Chuva': 1000,
-    'Sensor de Gás': 10000,
-    'Sensor de Solo': 2000
+    "Sensor de Chuva": 1000,
+    "Sensor de Gás": 10000,
+    "Sensor de Solo": 2000,
   };
 
   const minValue = minValues[sensorType];
@@ -82,9 +93,9 @@ async function insertSensorsInBatch(queryInterface, sensors) {
   const transaction = await queryInterface.sequelize.transaction();
 
   try {
-    const chunks = chunkArray(sensors, 100); // Divide a lista de sensores em lotes menores
+    const chunks = chunkArray(sensors, 100);
     for (const chunk of chunks) {
-      await queryInterface.bulkInsert('sensors', chunk, { transaction });
+      await queryInterface.bulkInsert("sensors", chunk, { transaction });
     }
 
     await transaction.commit();

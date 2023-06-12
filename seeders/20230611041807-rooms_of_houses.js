@@ -11,12 +11,15 @@ module.exports = {
       const immobileId = immobile.id;
 
       for (let i = 0; i < 5; i++) {
+        if(immobiles.length >= 300) {
+          break;
+        }
         roomsOfHouses.push({
           id: uuidv4(),
           name: generateRoomName(),
           immobileId: immobileId,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          created_at: new Date(),
+          updated_at: new Date(),
         });
       }
     });

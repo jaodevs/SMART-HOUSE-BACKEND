@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("rooms_of_houses", {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable("rooms_of_houses", {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -21,20 +21,18 @@ module.exports = {
           key: "id",
         },
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
 
-  async down(queryInterface) {
-    await queryInterface.dropTable("rooms_of_houses");
+  down: (queryInterface) => {
+    return queryInterface.dropTable("rooms_of_houses");
   },
 };

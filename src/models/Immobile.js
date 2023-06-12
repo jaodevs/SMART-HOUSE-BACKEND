@@ -5,7 +5,7 @@ class Immobile extends Model {
     super.init(
       {
         Addresses: DataTypes.STRING,
-        numberOfRooms: DataTypes.INTEGER,
+        number_Of_Rooms: DataTypes.INTEGER,
       },
       {
         sequelize,
@@ -14,7 +14,7 @@ class Immobile extends Model {
     );
   }
   static associate(models) {
-    this.belongsTo(models.Client, { foreignKey: "clientid", as: "client" });
+    this.belongsTo(models.Client, { foreignKey: "clientId", as: "client" });
   }
 }
 

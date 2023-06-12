@@ -2,11 +2,21 @@ const Sensors = require("../models/Sensors");
 
 module.exports = {
   async index(req, res) {
-    const sensors = await Sensors.findAll();
-
-    return res.json(sensors);
+    const { page = 1, limit = 10 } = req.query;
+    try {
+      const sensors = await Sensors.findAndCountAll({
+        offset: (page - 1) * limit,
+        limit: parseInt(limit),
+      });
+      const totalPages = Math.ceil(sensors.count / limit);
+      return res.json({
+        sensors: sensors.rows,
+        totalPages,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: "Server error" });
+    }
   },
-
   async store(req, res) {
     const { name, value } = req.body;
 

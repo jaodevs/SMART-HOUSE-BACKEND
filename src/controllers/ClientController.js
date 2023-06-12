@@ -5,8 +5,8 @@ module.exports = {
     const { page = 1, limit = 10 } = req.query;
     try {
       const clients = await Client.findAndCountAll({
-        offset: (page - 1) * limit, 
-        limit: parseInt(limit), 
+        offset: (page - 1) * limit,
+        limit: parseInt(limit),
       });
       const totalPages = Math.ceil(clients.count / limit);
       return res.json({
@@ -17,7 +17,6 @@ module.exports = {
       return res.status(500).json({ error: "Server error" });
     }
   },
-
   async store(req, res) {
     const { name, email, password } = req.body;
 

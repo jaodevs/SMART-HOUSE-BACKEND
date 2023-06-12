@@ -2,41 +2,38 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("immobile", {
+    return queryInterface.createTable("client", {
       id: {
-        type: Sequelize.UUID, 
+        type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
-      Addresses: {
+      name: {
         type: Sequelize.STRING(150),
         allowNull: false,
       },
-      numberOfRooms: {
-        type: Sequelize.INTEGER,
+      email: {
+        type: Sequelize.STRING(150),
         allowNull: false,
       },
-      clientId: {
-        type: Sequelize.STRING(36),
+      password: {
+        type: Sequelize.STRING(150),
         allowNull: false,
-        references: {
-          model: "client",
-          key: "id",
-        },
       },
-      createdAt: {
+
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable("immobile"),
+  down: (queryInterface) => {
+    return queryInterface.dropTable("client");
+  },
 };

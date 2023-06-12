@@ -2,9 +2,17 @@ const Immobile = require("../models/Immobile");
 
 module.exports = {
   async index(req, res) {
+    const { page = 1, limit = 10 } = req.query;
     try {
-      const immobiles = await Immobile.findAndCountAll();
-      return res.json(immobiles);
+      const immobile = await Immobile.findAndCountAll({
+        offset: (page - 1) * limit,
+        limit: parseInt(limit),
+      });
+      const totalPages = Math.ceil(immobile.count / limit);
+      return res.json({
+        immobile: immobile.rows,
+        totalPages,
+      });
     } catch (error) {
       return res.status(500).json({ error: "Server error" });
     }

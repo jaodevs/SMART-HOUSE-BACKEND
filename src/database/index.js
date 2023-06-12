@@ -8,10 +8,12 @@ const Sensors = require('../models/Sensors');
 
 const connection = new Sequelize(dbConfig);
 
+
 rooms_of_houses.init(connection);
 Immobile.init(connection);
 Client.init(connection);
 Sensors.init(connection);
+
 
 Immobile.associate(connection.models);
 rooms_of_houses.associate(connection.models);

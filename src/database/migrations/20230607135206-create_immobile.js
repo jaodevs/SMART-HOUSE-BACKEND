@@ -9,15 +9,15 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
-      Addresses: {
+      addresses: {
         type: Sequelize.STRING(150),
         allowNull: false,
       },
-      numberOfRooms: {
+      numberofrooms: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      clientId: {
+      client_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -25,18 +25,18 @@ module.exports = {
           key: "id",
         },
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
 
-  down: (queryInterface) => queryInterface.dropTable("immobile"),
+  down: (queryInterface) => {
+    return queryInterface.dropTable("immobile");
+  },
 };

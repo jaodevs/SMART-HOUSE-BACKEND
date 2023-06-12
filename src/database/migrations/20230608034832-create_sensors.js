@@ -3,7 +3,7 @@
 const sequelize = require("sequelize");
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("sensors", {
       id: {
         type: Sequelize.UUID,
@@ -19,34 +19,30 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      type:{
+      type: {
         type: sequelize.STRING,
-        allowNull: false
-
-
+        allowNull: false,
       },
       roomId: {
-        type: Sequelize.UUID, 
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: "rooms_of_houses",
           key: "id",
         },
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
 
-  async down(queryInterface) {
-    await queryInterface.dropTable("sensors");
+  down: (queryInterface) => {
+    return queryInterface.dropTable("sensors");
   },
 };

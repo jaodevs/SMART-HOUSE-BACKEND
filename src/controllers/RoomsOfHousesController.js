@@ -2,26 +2,21 @@ const RoomsOfHouses = require("../models/rooms_of_houses");
 
 module.exports = {
   async index(req, res) {
-    const rooms = await RoomsOfHouses.findAll();
-
-    return res.json(rooms);
+    const { page = 1, limit = 10 } = req.query;
+    try {
+      const rooms = await RoomsOfHouses.findAndCountAll({
+        offset: (page - 1) * limit,
+        limit: parseInt(limit),
+      });
+      const totalPages = Math.ceil(rooms.count / limit);
+      return res.json({
+        rooms: rooms.rows,
+        totalPages,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: "Server error" });
+    }
   },
-  // async index(req, res) {
-  //   const { page = 1, limit = 10 } = req.query;
-  //   try {
-  //     const rooms = await RoomsOfHouses.findAndCountAll({
-  //       offset: (page - 1) * limit,
-  //       limit: parseInt(limit),
-  //     });
-  //     const totalPages = Math.ceil(rooms.count / limit);
-  //     return res.json({
-  //       rooms: rooms.rows,
-  //       totalPages,
-  //     });
-  //   } catch (error) {
-  //     return res.status(500).json({ error: "Server error" });
-  //   }
-  // },
 
   async store(req, res) {
     const { name } = req.body;

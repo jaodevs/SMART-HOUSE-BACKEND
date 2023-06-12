@@ -1,12 +1,12 @@
-'use strict';
-const { v4: uuidv4 } = require('uuid');
+"use strict";
+const { v4: uuidv4 } = require("uuid");
 
 const names = [
-  'João Silva',
-  'Maria Santos',
-  'Pedro Almeida',
-  'Ana Pereira',
-  'Carlos Oliveira',
+  "João Silva",
+  "Maria Santos",
+  "Pedro Almeida",
+  "Ana Pereira",
+  "Carlos Oliveira",
 ];
 
 module.exports = {
@@ -23,22 +23,21 @@ module.exports = {
         email: email,
         password: `password${i + 1}`,
         created_at: new Date(),
-        updated_at: new Date()
+        updated_at: new Date(),
       });
     }
 
-    await queryInterface.bulkInsert('client', clients, {});
+    await queryInterface.bulkInsert("client", clients, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('client', null, {});
-  }
+    await queryInterface.bulkDelete("client", null, {});
+  },
 };
 
-// Função para gerar e-mail fictício com base no nome
 function generateEmail(name) {
-  const formattedName = name.replace(/\s/g, '').toLowerCase();
-  const domain = 'example.com';
+  const formattedName = name.replace(/\s/g, "").toLowerCase();
+  const domain = "example.com";
   const randomNumber = Math.floor(Math.random() * 100) + 1;
   return `${formattedName}${randomNumber}@${domain}`;
 }
