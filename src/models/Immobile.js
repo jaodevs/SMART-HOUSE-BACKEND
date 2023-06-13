@@ -4,8 +4,21 @@ class Immobile extends Model {
   static init(sequelize) {
     super.init(
       {
-        Addresses: DataTypes.STRING,
-        number_Of_Rooms: DataTypes.INTEGER,
+        id: {
+          type: DataTypes.UUID,
+          defaultValue: DataTypes.UUIDV4,
+          allowNull: false,
+          primaryKey: true,
+          unique: true,
+        },
+        addresses: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        numberofrooms: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       {
         sequelize,

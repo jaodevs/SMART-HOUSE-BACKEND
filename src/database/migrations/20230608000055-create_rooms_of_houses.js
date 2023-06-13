@@ -13,12 +13,13 @@ module.exports = {
         type: Sequelize.STRING(150),
         allowNull: false,
       },
-      immobileId: {
+      immobile_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: "immobile",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       created_at: {

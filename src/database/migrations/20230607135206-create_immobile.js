@@ -23,6 +23,8 @@ module.exports = {
         references: {
           model: "client",
           key: "id",
+          onDelete: "CASCADE",
+          
         },
       },
       created_at: {

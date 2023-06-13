@@ -29,6 +29,7 @@ module.exports = {
         references: {
           model: "rooms_of_houses",
           key: "id",
+          onDelete: "CASCADE",
         },
       },
       created_at: {

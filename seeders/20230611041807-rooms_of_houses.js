@@ -17,7 +17,7 @@ module.exports = {
         roomsOfHouses.push({
           id: uuidv4(),
           name: generateRoomName(),
-          immobileId: immobileId,
+          immobile_id: immobileId,
           created_at: new Date(),
           updated_at: new Date(),
         });

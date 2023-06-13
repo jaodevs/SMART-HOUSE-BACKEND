@@ -1,4 +1,5 @@
 const RoomsOfHouses = require("../models/rooms_of_houses");
+const Sensors = require("../models/Sensors");
 
 module.exports = {
   async index(req, res) {
@@ -19,11 +20,15 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { name } = req.body;
+    const { name, immobile_id } = req.body;
 
-    const newRoom = await RoomsOfHouses.create({ name });
+    try {
+      const newRoom = await RoomsOfHouses.create({ name, immobile_id });
 
-    return res.json(newRoom);
+      return res.json(newRoom);
+    } catch (error) {
+      return res.status(500).json({ error: "Server error" });
+    }
   },
 
   async findById(req, res) {
@@ -49,7 +54,14 @@ module.exports = {
       const room = await RoomsOfHouses.findByPk(id);
 
       if (!room) {
+        console.log(room);
         return res.status(404).json({ error: "Room not found" });
+      }
+
+      const hasRelatedSensors = await Sensors.count({ where: { roomId: id } });
+
+      if (hasRelatedSensors > 0) {
+        await Sensors.destroy({ where: { roomId: id } });
       }
 
       await room.destroy();

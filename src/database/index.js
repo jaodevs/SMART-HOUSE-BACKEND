@@ -16,7 +16,7 @@ Sensors.init(connection);
 
 
 Immobile.associate(connection.models);
-rooms_of_houses.associate(connection.models);
+// rooms_of_houses.associate(connection.models);
 Sensors.associate(connection.models);
 
 module.exports = connection;
