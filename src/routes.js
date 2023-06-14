@@ -18,7 +18,6 @@ routes.put("/clients/:id", clientController.update);
 routes.get("/immobiles", immobileController.index);
 routes.post("/immobiles", immobileController.store);
 routes.get("/immobiles/:id", immobileController.findById);
-routes.delete("/immobiles/:id", immobileController.delete);
 routes.put("/immobiles/:id", immobileController.update);
 
 /* rooms_of_houses */

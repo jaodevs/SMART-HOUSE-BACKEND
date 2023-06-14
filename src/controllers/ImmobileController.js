@@ -51,29 +51,6 @@ module.exports = {
     }
   },
 
-  async delete(req, res) {
-    const { id } = req.params;
-    try {
-      await Sensor.destroy({ where: { room_Id: id } });
-
-      await RoomOfHouse.destroy({ where: { immobile_id: id } });
-
-      const immobile = await Immobile.findByPk(id);
-      if (!immobile) {
-        return res.status(404).json({ error: "Immobile not found" });
-      }
-
-      await immobile.destroy();
-
-      return res
-        .status(200)
-        .json({ message: "Immobile and related rooms deleted successfully" });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Server error" });
-    }
-  },
-
   async update(req, res) {
     const { id } = req.params;
     const { addresses, numberofrooms } = req.body;
