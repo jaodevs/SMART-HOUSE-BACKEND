@@ -19,15 +19,20 @@ class Immobile extends Model {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        client_id: {
+          type: DataTypes.UUID,
+          allowNull: false,
+          references: {
+            model: "client",
+            key: "id",
+          },
+        },
       },
       {
         sequelize,
         tableName: "immobile",
       }
     );
-  }
-  static associate(models) {
-    this.belongsTo(models.Client, { foreignKey: "clientId", as: "client" });
   }
 }
 

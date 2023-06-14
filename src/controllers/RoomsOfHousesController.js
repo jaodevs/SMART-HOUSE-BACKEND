@@ -46,32 +46,6 @@ module.exports = {
       return res.status(500).json({ error: "Server error" });
     }
   },
-
-  async delete(req, res) {
-    const { id } = req.params;
-
-    try {
-      const room = await RoomsOfHouses.findByPk(id);
-
-      if (!room) {
-        console.log(room);
-        return res.status(404).json({ error: "Room not found" });
-      }
-
-      const hasRelatedSensors = await Sensors.count({ where: { roomId: id } });
-
-      if (hasRelatedSensors > 0) {
-        await Sensors.destroy({ where: { roomId: id } });
-      }
-
-      await room.destroy();
-
-      return res.json({ message: "Room deleted successfully" });
-    } catch (error) {
-      return res.status(500).json({ error: "Server error" });
-    }
-  },
-
   async update(req, res) {
     const { id } = req.params;
     const { name } = req.body;

@@ -23,7 +23,7 @@ module.exports = {
         type: sequelize.STRING,
         allowNull: false,
       },
-      roomId: {
+      room_Id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

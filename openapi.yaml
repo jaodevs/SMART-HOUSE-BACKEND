@@ -153,21 +153,6 @@ paths:
       responses:
         '200':
           description: OK
-    delete:
-      tags:
-        - imoveis
-      summary: Deleta um imóvel específico
-      parameters:
-        - name: imovelId
-          in: path
-          description: ID do imóvel
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: No Content
-
   /comodos:
     get:
       tags:
@@ -371,5 +356,7 @@ components:
           type: string
         tipo:
           type: string
+        valor:
+          type: number
         status:
           type: string

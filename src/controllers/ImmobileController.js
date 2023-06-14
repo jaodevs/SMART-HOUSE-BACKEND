@@ -1,4 +1,6 @@
 const Immobile = require("../models/Immobile");
+const RoomOfHouse = require("../models/rooms_of_houses");
+const Sensor = require("../models/Sensors");
 
 module.exports = {
   async index(req, res) {
@@ -19,10 +21,14 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { Addresses, numberOfRooms } = req.body;
+    const { addresses, numberofrooms, client_id } = req.body;
 
     try {
-      const newImmobile = await Immobile.create({ Addresses, numberOfRooms });
+      const newImmobile = await Immobile.create({
+        addresses,
+        numberofrooms,
+        client_id,
+      });
       return res.json(newImmobile);
     } catch (error) {
       return res.status(500).json({ error: "Server error" });
@@ -47,25 +53,30 @@ module.exports = {
 
   async delete(req, res) {
     const { id } = req.params;
-
     try {
-      const immobile = await Immobile.findByPk(id);
+      await Sensor.destroy({ where: { room_Id: id } });
 
+      await RoomOfHouse.destroy({ where: { immobile_id: id } });
+
+      const immobile = await Immobile.findByPk(id);
       if (!immobile) {
         return res.status(404).json({ error: "Immobile not found" });
       }
 
       await immobile.destroy();
 
-      return res.json({ message: "Immobile deleted successfully" });
+      return res
+        .status(200)
+        .json({ message: "Immobile and related rooms deleted successfully" });
     } catch (error) {
+      console.error(error);
       return res.status(500).json({ error: "Server error" });
     }
   },
 
   async update(req, res) {
     const { id } = req.params;
-    const { Addresses, numberOfRooms } = req.body;
+    const { addresses, numberofrooms } = req.body;
 
     try {
       const immobile = await Immobile.findByPk(id);
@@ -74,7 +85,7 @@ module.exports = {
         return res.status(404).json({ error: "Immobile not found" });
       }
 
-      await immobile.update({ Addresses, numberOfRooms });
+      await immobile.update({ addresses, numberofrooms });
 
       return res.json(immobile);
     } catch (error) {

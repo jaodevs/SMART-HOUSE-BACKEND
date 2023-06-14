@@ -31,7 +31,7 @@ module.exports = {
           name: generateSensorName(sensorType),
           value: generateArduinoSensorValue(sensorType),
           type: sensorType,
-          roomId: roomId,
+          room_Id: roomId,
           created_at: new Date(),
           updated_at: new Date(),
         };

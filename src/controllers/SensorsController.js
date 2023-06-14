@@ -17,12 +17,15 @@ module.exports = {
       return res.status(500).json({ error: "Server error" });
     }
   },
+
   async store(req, res) {
-    const { name, value } = req.body;
-
-    const newSensor = await Sensors.create({ name, value });
-
-    return res.json(newSensor);
+    const { name, value, type, room_Id } = req.body;
+    try {
+      const newSensor = await Sensors.create({ name, value, type, room_Id });
+      return res.json(newSensor);
+    } catch (error) {
+      return res.status(500).json({ error: "Server error" });
+    }
   },
 
   async findById(req, res) {
