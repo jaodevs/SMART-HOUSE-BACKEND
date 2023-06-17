@@ -4,11 +4,11 @@ info:
   version: 1.0.0
 
 paths:
-  /clientes:
+  /Clientss:
     get:
       tags:
-        - clientes
-      summary: Retorna uma lista de clientes
+        - clients
+      summary: Retorna uma lista de Clientss
       responses:
         '200':
           description: OK
@@ -17,30 +17,30 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Cliente'
+                  $ref: '#/components/schemas/Clients'
     post:
       tags:
-        - clientes
-      summary: Cria um novo cliente
+        - clients
+      summary: Cria um novo Clients
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Cliente'
+              $ref: '#/components/schemas/Clients'
       responses:
         '201':
           description: Created
 
-  /clientes/{clienteId}:
+  /Clientss/{ClientsId}:
     get:
       tags:
-        - clientes
-      summary: Retorna um cliente específico
+        - clients
+      summary: Retorna um Clients específico
       parameters:
-        - name: clienteId
+        - name: ClientsId
           in: path
-          description: ID do cliente
+          description: ID do Clients
           required: true
           schema:
             type: string
@@ -50,35 +50,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cliente'
+                $ref: '#/components/schemas/Clients'
     put:
       tags:
-        - clientes
-      summary: Atualiza um cliente específico
+        - clients
+      summary: Atualiza um Clients específico
       parameters:
-        - name: clienteId
+        - name: ClientsId
           in: path
-          description: ID do cliente
+          description: ID do Clients
           required: true
           schema:
             type: string
         - name: body
           in: query
-          description: Objeto de cliente para ser atualizado
+          description: Objeto de Clients para ser atualizado
           required: true
           schema:
-            $ref: '#/components/schemas/Cliente'
+            $ref: '#/components/schemas/Clients'
       responses:
         '200':
           description: OK
     delete:
       tags:
-        - clientes
-      summary: Deleta um cliente específico
+        - clients
+      summary: Deleta um Clients específico
       parameters:
-        - name: clienteId
+        - name: ClientsId
           in: path
-          description: ID do cliente
+          description: ID do Clients
           required: true
           schema:
             type: string
@@ -86,10 +86,10 @@ paths:
         '204':
           description: No Content
 
-  /imoveis:
+  /immobiles:
     get:
       tags:
-        - imoveis
+        - immobiles
       summary: Retorna uma lista de imóveis
       responses:
         '200':
@@ -99,28 +99,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Imovel'
+                  $ref: '#/components/schemas/Immobile'
     post:
       tags:
-        - imoveis
+        - immobiles
       summary: Cria um novo imóvel
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Imovel'
+              $ref: '#/components/schemas/Immobile'
       responses:
         '201':
           description: Created
 
-  /imoveis/{imovelId}:
+  /immobiles/{ImmobileId}:
     get:
       tags:
-        - imoveis
+        - immobiles
       summary: Retorna um imóvel específico
       parameters:
-        - name: imovelId
+        - name: ImmobileId
           in: path
           description: ID do imóvel
           required: true
@@ -132,13 +132,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Imovel'
+                $ref: '#/components/schemas/Immobile'
     put:
       tags:
-        - imoveis
+        - immobiles
       summary: Atualiza um imóvel específico
       parameters:
-        - name: imovelId
+        - name: ImmobileId
           in: path
           description: ID do imóvel
           required: true
@@ -149,14 +149,14 @@ paths:
           description: Objeto de imóvel para ser atualizado
           required: true
           schema:
-            $ref: '#/components/schemas/Imovel'
+            $ref: '#/components/schemas/Immobile'
       responses:
         '200':
           description: OK
-  /comodos:
+  /rooms_of_houses:
     get:
       tags:
-        - comodos
+        - rooms_of_houses
       summary: Retorna uma lista de cômodos
       responses:
         '200':
@@ -166,28 +166,28 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Comodo'
+                  $ref: '#/components/schemas/RoomsOfHouses'
     post:
       tags:
-        - comodos
+        - rooms_of_houses
       summary: Cria um novo cômodo
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Comodo'
+              $ref: '#/components/schemas/RoomsOfHouses'
       responses:
         '201':
           description: Created
 
-  /comodos/{comodoId}:
+  /rooms_of_houses/{RoomsOfHousesId}:
     get:
       tags:
-        - comodos
+        - rooms_of_houses
       summary: Retorna um cômodo específico
       parameters:
-        - name: comodoId
+        - name: RoomsOfHousesId
           in: path
           description: ID do cômodo
           required: true
@@ -199,13 +199,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comodo'
+                $ref: '#/components/schemas/RoomsOfHouses'
     put:
       tags:
-        - comodos
+        - rooms_of_houses
       summary: Atualiza um cômodo específico
       parameters:
-        - name: comodoId
+        - name: RoomsOfHousesId
           in: path
           description: ID do cômodo
           required: true
@@ -216,16 +216,16 @@ paths:
           description: Objeto de cômodo para ser atualizado
           required: true
           schema:
-            $ref: '#/components/schemas/Comodo'
+            $ref: '#/components/schemas/RoomsOfHouses'
       responses:
         '200':
           description: OK
     delete:
       tags:
-        - comodos
+        - rooms_of_houses
       summary: Deleta um cômodo específico
       parameters:
-        - name: comodoId
+        - name: RoomsOfHousesId
           in: path
           description: ID do cômodo
           required: true
@@ -235,11 +235,11 @@ paths:
         '204':
           description: No Content
 
-  /sensores:
+  /Sensorss:
     get:
       tags:
-        - sensores
-      summary: Retorna uma lista de sensores
+        - Sensorss
+      summary: Retorna uma lista de Sensorss
       responses:
         '200':
           description: OK
@@ -248,30 +248,30 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Sensor'
+                  $ref: '#/components/schemas/Sensors'
     post:
       tags:
-        - sensores
-      summary: Cria um novo sensor
+        - Sensorss
+      summary: Cria um novo Sensors
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Sensor'
+              $ref: '#/components/schemas/Sensors'
       responses:
         '201':
           description: Created
 
-  /sensores/{sensorId}:
+  /Sensorss/{SensorsId}:
     get:
       tags:
-        - sensores
-      summary: Retorna um sensor específico
+        - Sensorss
+      summary: Retorna um Sensors específico
       parameters:
-        - name: sensorId
+        - name: SensorsId
           in: path
-          description: ID do sensor
+          description: ID do Sensors
           required: true
           schema:
             type: string
@@ -281,35 +281,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sensor'
+                $ref: '#/components/schemas/Sensors'
     put:
       tags:
-        - sensores
-      summary: Atualiza um sensor específico
+        - Sensorss
+      summary: Atualiza um Sensors específico
       parameters:
-        - name: sensorId
+        - name: SensorsId
           in: path
-          description: ID do sensor
+          description: ID do Sensors
           required: true
           schema:
             type: string
         - name: body
           in: query
-          description: Objeto de sensor para ser atualizado
+          description: Objeto de Sensors para ser atualizado
           required: true
           schema:
-            $ref: '#/components/schemas/Sensor'
+            $ref: '#/components/schemas/Sensors'
       responses:
         '200':
           description: OK
     delete:
       tags:
-        - sensores
-      summary: Deleta um sensor específico
+        - Sensorss
+      summary: Deleta um Sensors específico
       parameters:
-        - name: sensorId
+        - name: SensorsId
           in: path
-          description: ID do sensor
+          description: ID do Sensors
           required: true
           schema:
             type: string
@@ -319,37 +319,37 @@ paths:
 
 components:
   schemas:
-    Cliente:
+    Clients:
       type: object
       properties:
         id:
           type: string
-        nome:
+        name:
           type: string
         email:
           type: string
 
-    Imovel:
+    Immobile:
       type: object
       properties:
         id:
           type: string
-        jm]:
+        name:
           type: string
         tipo:
           type: string
 
-    Comodo:
+    RoomsOfHouses:
       type: object
       properties:
         id:
           type: string
-        nome:
+        name:
           type: string
         area:
           type: number
 
-    Sensor:
+    Sensors:
       type: object
       properties:
         id:
